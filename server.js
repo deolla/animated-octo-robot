@@ -9,7 +9,7 @@ dotenv.config()
 const app = express();
 const PORT = 3000;
 
-const apiWeatherKey = process.env.apikey1;
+const apiWeatherKey = '974c158de55f4408b1d75912240207'
 
 
 app.use(requestIp.mw());
@@ -27,8 +27,7 @@ const cleanVisitorName = (name) => {
 
 app.get('/api/hello', async (req, res) => {
   const visitor_name = cleanVisitorName(req.query.visitor_name || 'Guest');
-  const client_ip = cleanIPv6(req.headers['x-forwarded-for'] || req.clientIp || '127.0.0.1' || req.connection.remoteAddress);
-  const ip = '127.0.0.1';
+  const client_ip = cleanIPv6(req.headers['x-forwarded-for'] || req.clientIp);
 
   console.log(client_ip);
   console.log(ip);
