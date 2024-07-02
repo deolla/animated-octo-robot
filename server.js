@@ -29,8 +29,10 @@ const cleanVisitorName = (name) => {
 app.get('/api/hello', async (req, res) => {
   const visitor_name = cleanVisitorName(req.query.visitor_name || 'Guest');
   const client_ip = cleanIPv6(req.headers['x-forwarded-for'] || req.clientIp || '127.0.0.1' || req.connection.remoteAddress);
+  const ip = cleanIPv4(req.clientIp || '127.0.0.1');
 
   console.log(client_ip);
+  console.log(ip);
 
   try {
     const weatherResponse = await axios.get(`https://api.weatherapi.com/v1/current.json`, {
@@ -44,7 +46,7 @@ app.get('/api/hello', async (req, res) => {
     const temperature = weatherResponse.data.current.temp_c;
     
     const response = {
-      client_ip: client_ip,
+      client_ip: ip,
       location: ipLocation,
       greeting: `Hello, ${visitor_name}!, the temeperature is ${parseInt(temperature)} degrees Celcius in ${ipLocation}`,
     };
