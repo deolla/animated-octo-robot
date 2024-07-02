@@ -41,11 +41,12 @@ app.get('/api/hello', async (req, res) => {
     });
     
     const ipLocation = weatherResponse.data.location.name;
+    const temperature = weatherResponse.data.current.temp_c;
     
     const response = {
       client_ip: client_ip,
       location: ipLocation,
-      greeting: `Hello, ${visitor_name}!`,
+      greeting: `Hello, ${visitor_name}!, the temeperature is ${parseInt(temperature)} degrees Celcius in ${locationResponse}.`,
     };
     res.json(response);
   } catch (error) {
