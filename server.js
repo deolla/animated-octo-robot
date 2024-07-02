@@ -20,7 +20,6 @@ const cleanIPv6 = (ip) => {
   }
   return ip;
 };
-
 const cleanVisitorName = (name) => {
   return name.replace(/[\\/"]/g, '');
 };
@@ -29,7 +28,7 @@ const cleanVisitorName = (name) => {
 app.get('/api/hello', async (req, res) => {
   const visitor_name = cleanVisitorName(req.query.visitor_name || 'Guest');
   const client_ip = cleanIPv6(req.headers['x-forwarded-for'] || req.clientIp || '127.0.0.1' || req.connection.remoteAddress);
-  const ip = cleanIPv4(req.clientIp || '127.0.0.1');
+  const ip = cleanIPv6(req.clientIp || '127.0.0.1');
 
   console.log(client_ip);
   console.log(ip);
