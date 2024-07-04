@@ -9,7 +9,7 @@ dotenv.config()
 const app = express();
 const PORT = 3000;
 
-const apiWeatherKey = '974c158de55f4408b1d75912240207'
+const apiWeatherKey = process.env.apikey1;
 
 
 app.use(requestIp.mw());
